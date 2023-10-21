@@ -1,4 +1,4 @@
-# Assignment Name
+# Angular Assignment CRUD
 
 📝 Angular CRUD App with mysql and express
 
