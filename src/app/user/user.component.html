@@ -1,0 +1,67 @@
+<div class="App p-8 bg-gray-100 min-h-screen">
+  <div class="max-w-4xl mx-auto bg-white rounded-xl shadow-md overflow ">
+    <div class="md:flex">
+      <div class="p-8">
+        <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">User Form</div>
+
+        <div class="mt-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="userid">User ID</label>
+          <input id="userid" type="text" name="userid" placeholder="User ID" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" [value]="isCreateMode ? getNextUserId() : formData.userid" [readonly]="!isCreateMode" [(ngModel)]="formData.userid">
+        </div>
+
+        <div class="mt-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
+          <input id="email" type="text" name="email" placeholder="Email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" [(ngModel)]="formData.email">
+        </div>
+
+        <div class="mt-4">
+          <label class="block text-gray-700 text-sm font-bold mb-2" for="password">Password</label>
+          <input id="password" type="text" name="password" placeholder="Password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" [(ngModel)]="formData.password">
+        </div>
+
+        <div class="mt-6">
+          <button (click)="handleInsertOrUpdate()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+            {{ isCreateMode ? 'Create User' : 'Update User' }}
+          </button>
+        </div>
+
+        <div class="mt-8">
+          <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">User Search</div>
+          <input type="text" placeholder="Search by User ID or Email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mt-3 leading-tight focus:outline-none focus:shadow-outline" [(ngModel)]="searchText" (input)="handleSearch()">
+        </div>
+
+        <div class="mt-8">
+          <div class="uppercase tracking-wide text-sm text-indigo-500 font-semibold">User List</div>
+          <table class="min-w-full divide-y divide-gray-200 mt-4">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">User ID</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Password</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <tr *ngFor="let user of filteredUsers">
+                <td class="px-6 py-4 whitespace-nowrap">{{ user.userid }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ user.email }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ renderPasswordCircles(user.password) }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">
+                  <button (click)="handleRead(user)" class="bg-green-500 text-white px-2 py-1 rounded mr-2 focus:outline-none hover:bg-green-600">
+                    Read
+                  </button>
+                  <button (click)="handleEdit(user.userid)" class="bg-blue-500 text-white px-2 py-1 rounded mr-2 focus:outline-none hover:bg-blue-600">
+                    Edit
+                  </button>
+                  <button (click)="handleDelete(user.userid)" class="bg-red-500 text-white px-2 py-1 rounded focus:outline-none hover:bg-red-600">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
