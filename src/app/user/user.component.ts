@@ -2,12 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { DataService } from '../data.service';
 
 
+
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
+  emailErrorMessage: string = '';
+  passwordErrorMessage: string = '';
+
   users: any[] = [];
   filteredUsers: any[] = [];
   searchText: string = '';
@@ -44,8 +48,32 @@ export class UserComponent implements OnInit {
       (user.email && user.email.toString().toLowerCase().includes(searchLower))
     );
   }
+  validateEmail(email: string): boolean {
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return emailPattern.test(email);
+  }
+
+  // Function to validate password (basic condition: minimum 8 characters)
+  validatePassword(password: string): boolean {
+    return password.length >= 8;
+  }
+
 
   handleInsertOrUpdate() {
+    this.emailErrorMessage = '';
+    this.passwordErrorMessage = '';
+
+    // Validation for email
+    if (!this.validateEmail(this.formData.email)) {
+      this.emailErrorMessage = 'Invalid email format';
+      return; // Don't proceed if email is invalid
+    }
+
+    // Validation for password (basic condition: minimum 8 characters)
+    if (!this.validatePassword(this.formData.password)) {
+      this.passwordErrorMessage = 'Password must be at least 8 characters long';
+      return; // Don't proceed if the password is invalid
+    }
     const requestData = { ...this.formData };
 
     if (this.isCreateMode) {

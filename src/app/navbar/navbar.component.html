@@ -2,11 +2,14 @@
   <div class="max-w-7xl mx-auto flex justify-between items-center">
     <a class="text-2xl font-bold text-white" href="#">My Angular App</a>
     <ul class="flex space-x-4">
-      <li>
+      <li *ngIf="isUserAuthenticated()">
         <a class="text-gray-300 hover:text-white transition-colors duration-200" href="/user">User</a>
       </li>
-      <li>
+      <li *ngIf="isUserAuthenticated()">
         <a class="text-gray-300 hover:text-white transition-colors duration-200" href="/contact">Contact Us</a>
+      </li>
+      <li *ngIf="isUserAuthenticated()">
+        <button class="text-gray-300 hover:text-white transition-colors duration-200" (click)="logout()">Log Out</button>
       </li>
     </ul>
   </div>
