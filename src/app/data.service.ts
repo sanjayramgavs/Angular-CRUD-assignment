@@ -12,7 +12,7 @@ export class DataService {
   getAllUsers() {
     return axios.get(`${this.apiUrl}/getAll`);
   }
-
+  
   createUser(user: any) {
     return axios.post(`${this.apiUrl}/insert`, user, {
       headers: { 'Content-Type': 'application/json' }

@@ -94,13 +94,15 @@ export class UserComponent implements OnInit {
     } else {
       this.dataService.updateUser(requestData)
         .then(() => {
+        
+          this.isCreateMode= true;
+          alert(`User updated successfully.`);
+          this.fetchUsers();
           this.formData = {
-            userid: '',
+            userid: this.getNextUserId(),
             password: '',
             email: ''
           };
-          alert(`User updated successfully.`);
-          this.fetchUsers();
         })
         .catch((error) => {
           console.error(error);
@@ -109,14 +111,18 @@ export class UserComponent implements OnInit {
   }
 
   handleDelete(userId: any) {
-    this.dataService.deleteUser(userId)
-      .then(() => {
-        this.fetchUsers();
-        alert('User deleted successfully.');
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    const confirmation = window.confirm("Are you sure you want to delete this user?");
+    
+    if (confirmation) {
+      this.dataService.deleteUser(userId)
+        .then(() => {
+          this.fetchUsers();
+          alert('User deleted successfully.');
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }
   }
   getNextUserId() {
     if (this.users.length === 0) {
