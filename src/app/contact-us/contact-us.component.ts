@@ -27,7 +27,6 @@ export class ContactUsComponent {
 
   submitForm() {
     if (this.contactForm.valid) {
-      // Form validation is successful, proceed to add contact
       const contactData = this.contactForm.value;
 
       this.contactService.addContact(contactData).subscribe(

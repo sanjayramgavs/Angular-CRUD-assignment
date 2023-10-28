@@ -10,10 +10,9 @@ import { DataService } from './data.service';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogComponent } from './dialog/dialog.component';
-import { MatDialogModule } from '@angular/material/dialog'; // Import MatDialogModule
+import { MatDialogModule } from '@angular/material/dialog'; 
 import { ReactiveFormsModule } from '@angular/forms';
 
 
