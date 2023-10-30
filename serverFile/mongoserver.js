@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 const uri =
-  "mongodb+srv://root:root@appcluster.15wfgab.mongodb.net/?retryWrites=true&w=majority";
+  "ATLAS_URL";
 const client = new MongoClient(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
